@@ -2,6 +2,7 @@
   "category": "javascript",
   "quizzes": [
     {
+      "title": "Simple Add",
       "key": "simple-add",
       "categories": ["beginner", "interview"]
     }

@@ -1,25 +1,14 @@
-import axios from 'axios'
+import buildRoutes from './buildRoutes';
 
 export default {
   getSiteData: () => ({
-    title: 'React Static',
+    title: 'Code Quiz',
   }),
-  getRoutes: async () => {
-    const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    return [
-      {
-        path: '/blog',
-        getData: () => ({
-          posts,
-        }),
-        children: posts.map(post => ({
-          path: `/post/${post.id}`,
-          component: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
-      },
-    ]
+  getRoutes: () => {
+    const routes = buildRoutes();
+    console.log('Routes:');
+    console.log(routes);
+    console.log(routes[0].getData());
+    return routes;
   },
-}
+};

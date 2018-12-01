@@ -1,12 +1,12 @@
-import React from 'react'
-import { Router, Link } from 'react-static'
-import { Provider } from 'react-redux'
+import React from 'react';
+import { Router, Link } from 'react-static';
+import { Provider } from 'react-redux';
 
-import Routes from 'react-static-routes'
+import Routes from 'react-static-routes';
 //
-import store from './connectors/redux'
+import store from './connectors/redux';
 
-import './app.css'
+import './app.css';
 
 const App = () => (
   <Provider store={store}>
@@ -16,8 +16,9 @@ const App = () => (
           <Link exact to="/">
             Home
           </Link>
-          <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
+          <Link exact to="/javascript">
+            JavaScript
+          </Link>
         </nav>
         <div className="content">
           <Routes />
@@ -25,6 +26,6 @@ const App = () => (
       </div>
     </Router>
   </Provider>
-)
+);
 
-export default App
+export default App;
