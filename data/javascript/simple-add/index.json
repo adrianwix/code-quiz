@@ -1,0 +1,24 @@
+{
+  "title": "Simple Add",
+  "description": "Solve a simple addition",
+  "questionFile": "question.js",
+  "difficulty": 1,
+  "answers": [
+    {
+      "answer": "3",
+      "isCorrect": false
+    },
+    {
+      "answer": "4",
+      "isCorrect": false
+    },
+    {
+      "answer": "5",
+      "isCorrect": true
+    },
+    {
+      "answer": "6",
+      "isCorrect": false
+    }
+  ]
+}

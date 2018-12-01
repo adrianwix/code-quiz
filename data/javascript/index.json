@@ -1,0 +1,11 @@
+{
+  "category": "javascript",
+  "quizzes": [
+    {
+      "key": "simple-add",
+      "categories": ["beginner", "interview"]
+    }
+  ],
+  "minimumDifficulty": 1,
+  "maximumDifficulty": 10
+}
