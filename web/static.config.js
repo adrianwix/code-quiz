@@ -6,9 +6,10 @@ export default {
   }),
   getRoutes: () => {
     const routes = buildRoutes();
+
     console.log('Routes:');
     console.log(routes);
-    console.log(routes[0].getData());
+
     return routes;
   },
 };
