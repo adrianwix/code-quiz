@@ -7,8 +7,8 @@ const Category = ({ name, quizzes, category }) => {
     <div>
       <h1 style={{ textAlign: 'center' }}>{name}</h1>
       <ul>
-        {quizzes.map(q => (
-          <li>
+        {quizzes.map((q, index) => (
+          <li key={index}>
             <Link to={`/${category.category}/${q.key}`}>{q.title}</Link>
           </li>
         ))}
