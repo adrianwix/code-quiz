@@ -1,29 +1,20 @@
 import React from 'react';
-import { Router, Link } from 'react-static';
+import { Router } from 'react-static';
 import { Provider } from 'react-redux';
 
 import Routes from 'react-static-routes';
 //
 import store from './connectors/redux';
 
+import Layout from './presentational/Layout';
 import './app.css';
 
 const App = () => (
   <Provider store={store}>
     <Router>
-      <div>
-        <nav>
-          <Link exact to="/">
-            Home
-          </Link>
-          <Link exact to="/javascript">
-            JavaScript
-          </Link>
-        </nav>
-        <div className="content">
-          <Routes />
-        </div>
-      </div>
+      <Layout>
+        <Routes />
+      </Layout>
     </Router>
   </Provider>
 );

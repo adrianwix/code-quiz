@@ -22,8 +22,8 @@ class QuestionPage extends Component {
           <code className="language-javascript">{file}</code>
         </pre>
         <ul>
-          {question.answers.map(a => (
-            <li>{a.answer}</li>
+          {question.answers.map((a, index) => (
+            <li key={index}>{a.answer}</li>
           ))}
         </ul>
       </div>
