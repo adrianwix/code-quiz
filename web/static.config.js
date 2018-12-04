@@ -18,6 +18,7 @@ export default {
     // into the head of each page.
     <Html>
       <Head>
+        <title>Code Quiz</title>
         <style id="evergreen-css" dangerouslySetInnerHTML={{ __html: renderMeta.styleTags }} />
         {renderMeta.hydrationScript}
       </Head>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Prism from 'prismjs';
-import { Alert, Button, Card, Heading, majorScale, Pane, Paragraph, Radio } from 'evergreen-ui';
+import { Alert, Button, Card, Heading, majorScale, Pane, Paragraph } from 'evergreen-ui';
 import Grid from '../Shared/Grid';
 import Row from '../Shared/Row';
 import Cell from '../Shared/Cell';
+import '../../prism.css';
 
 class Question extends Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class Question extends Component {
         Answer = <Alert intent="warning" title={result.text} marginTop={majorScale(4)} />;
         break;
       default:
-        Answer = false;
+        Answer = <span />;
     }
     return (
       <Grid elevation={1} margin={majorScale(2)}>
@@ -67,7 +68,7 @@ class Question extends Component {
                 </Button>
               </form>
             </Card>
-            {Answer && Answer}
+            {Answer}
           </Cell>
         </Row>
       </Grid>

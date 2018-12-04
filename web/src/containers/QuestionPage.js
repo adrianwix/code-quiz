@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Prism from 'prismjs';
-import '../prism.css';
 import Question from '../presentational/Question/Question';
 
 const questionResults = {

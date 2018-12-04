@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Pane from 'evergreen-ui/esm/layers/src/Pane';
+import { Pane } from 'evergreen-ui';
 import { majorScale } from 'evergreen-ui';
 
 /**
