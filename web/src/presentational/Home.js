@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Heading, majorScale, Pane, Text } from 'evergreen-ui';
-import Grid from '../Shared/Grid';
-import Row from '../Shared/Row';
-import Cell from '../Shared/Cell';
+import Grid from './Shared/Grid';
+import Row from './Shared/Row';
+import Cell from './Shared/Cell';
 
 const Home = () => {
   return (
