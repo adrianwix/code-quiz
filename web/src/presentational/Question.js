@@ -37,9 +37,15 @@ class Question extends Component {
           <Cell padding={majorScale(2)} background={'lightest'} columns={6} offset={4}>
             <Heading size={900}>{question.title}</Heading>
             <Paragraph size={500}>{question.description}</Paragraph>
-            <pre>
-              <code className="language-javascript">{file}</code>
-            </pre>
+            <div className="code-container">
+              <div className="traffic traffic_red" />
+              <div className="traffic traffic_yellow" />
+              <div className="traffic traffic_green" />
+              <pre>
+                <code className="language-javascript">{file}</code>
+              </pre>
+            </div>
+
             <Card>
               <form action="">
                 {question.answers.map((a, index) => {
