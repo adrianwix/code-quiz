@@ -25,7 +25,6 @@ const buildRoutes = () => {
       getData: () => ({
         name: c.name,
         category,
-        quizzes,
       }),
       component: 'src/pages/Category',
     };

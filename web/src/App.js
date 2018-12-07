@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import Routes from 'react-static-routes';
 //
-import store from './connectors/redux';
+import store from './createStore';
 
 import Layout from './presentational/Layout';
 import './app.css';

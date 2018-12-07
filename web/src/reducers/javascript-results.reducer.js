@@ -1,4 +1,4 @@
-import javascriptData from '../../../../../data/javascript/index.json';
+import javascriptData from '../../../data/javascript/index.json';
 import actionTypes from '../actions-types';
 
 const getInitialState = () => {

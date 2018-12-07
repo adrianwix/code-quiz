@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Question from '../presentational/Question';
 import { connect } from 'react-redux';
-import { updateJavascriptResults } from '../connectors/redux/action-creators/update-javascript-results';
+import { updateJavascriptResults } from '../action-creators/update-javascript-results';
 
 const questionResults = {
   pending: {

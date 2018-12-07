@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import { Alert, Button, Card, Heading, majorScale, Pane, Paragraph } from 'evergreen-ui';
 import Grid from './Shared/Grid';
