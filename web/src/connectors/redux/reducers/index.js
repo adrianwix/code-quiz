@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import counter from './counter';
+import javascriptResults from './javascript-results';
 
 const reducer = combineReducers({
-  counter,
+  javascriptResults,
 });
 
 export default reducer;

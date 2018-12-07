@@ -46,6 +46,7 @@ const buildRoutes = () => {
         getData: () => ({
           question,
           file,
+          questionKey: q.key,
         }),
         component: 'src/pages/Question',
       };
