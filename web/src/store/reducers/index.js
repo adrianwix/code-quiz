@@ -7,5 +7,3 @@ const reducer = combineReducers({
 });
 
 export default reducer;
-
-export const getJavasScriptResults = state => state.javascriptResults;

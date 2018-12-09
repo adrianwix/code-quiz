@@ -1,10 +1,10 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import Grid from './Shared/Grid';
-import Row from './Shared/Row';
-import Cell from './Shared/Cell';
 import { Heading, majorScale } from 'evergreen-ui';
 import { Link } from 'react-static';
+import Grid from 'presentational/Shared/Grid';
+import Row from 'presentational/Shared/Row';
+import Cell from 'presentational/Shared/Cell';
 import queryString from 'query-string';
 
 console.log('queryString', queryString);

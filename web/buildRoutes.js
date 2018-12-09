@@ -26,7 +26,7 @@ const buildRoutes = () => {
         name: c.name,
         category,
       }),
-      component: 'src/pages/Category',
+      component: 'src/components/pages/Category',
     };
 
     categoryRoutes.push(categoryRoute);
@@ -47,7 +47,7 @@ const buildRoutes = () => {
           file,
           questionKey: q.key,
         }),
-        component: 'src/pages/Question',
+        component: 'src/components/pages/Question',
       };
 
       questionRoutes.push(questionRoute);

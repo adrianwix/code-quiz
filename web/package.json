@@ -22,17 +22,18 @@
     "react-redux": "^5.0.6",
     "react-static": "^5.9.12",
     "react-static-routes": "latest",
-    "redux": "^3.7.2"
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-prettier": "^3.0.0",
     "eslint-config-react-tools": "1.x.x",
+    "eslint-plugin-prettier": "^3.0.0",
     "prettier": "^1.15.3",
-    "serve": "^6.1.0",
-    "babel-eslint": "^10.0.1",
+    "react-dom": "latest",
     "react-hot-loader": "latest",
-    "react-dom": "latest"
+    "serve": "^6.1.0"
   }
 }

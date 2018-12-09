@@ -1,13 +1,11 @@
 import Category from '../presentational/Category';
-import { getJavasScriptResults } from '../reducers';
 import { connect } from 'react-redux';
+import { getJavasScriptResults } from 'reducers/selectors';
 
 const mapStateToProps = state => {
   return {
     javascriptResults: getJavasScriptResults(state),
   };
 };
-export default connect(
-  mapStateToProps,
-  null,
-)(Category);
+
+export default connect(mapStateToProps)(Category);

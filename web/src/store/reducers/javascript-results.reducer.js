@@ -1,5 +1,8 @@
-import javascriptData from '../../../data/javascript/index.json';
-import actionTypes from '../actions-types';
+import actionTypes from 'actions/quiz/actions-types';
+// NOTE(Trey): I think we should either infer the question being unsolved
+// by it being absent in the reducer or have the component load this hydrate
+// this data on componentDidMount. Importing directly into a reducer feels brittle.
+import javascriptData from '../../../../data/javascript/index.json';
 
 const getInitialState = () => {
   const initialState = {};

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import { Alert, Button, Card, Heading, majorScale, Pane, Paragraph } from 'evergreen-ui';
-import Grid from './Shared/Grid';
-import Row from './Shared/Row';
-import Cell from './Shared/Cell';
-import '../prism.css';
+import Grid from 'presentational/Shared/Grid';
+import Row from 'presentational/Shared/Row';
+import Cell from 'presentational/Shared/Cell';
+import 'styles/prism.css';
 
 class Question extends Component {
   componentDidMount() {
