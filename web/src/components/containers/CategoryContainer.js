@@ -1,10 +1,13 @@
 import Category from '../presentational/Category';
 import { connect } from 'react-redux';
 import { getJavasScriptResults } from 'reducers/selectors';
+import * as FromCategory from '../../store/reducers/category.reducer';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const { category } = ownProps;
+  console.log(category);
   return {
-    javascriptResults: getJavasScriptResults(state),
+    categoryAnswers: FromCategory.getCategory(state, category.category),
   };
 };
 

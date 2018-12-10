@@ -1,4 +1,4 @@
-import actionTypes from 'actions/quiz/actions-types';
+import actionTypes from 'actions/quiz/types.actions';
 // NOTE(Trey): I think we should either infer the question being unsolved
 // by it being absent in the reducer or have the component load this hydrate
 // this data on componentDidMount. Importing directly into a reducer feels brittle.

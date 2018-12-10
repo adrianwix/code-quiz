@@ -16,7 +16,7 @@ class Question extends Component {
     Prism.highlightAll();
   }
   render() {
-    const { question, file, inputsChecked, result, onChange, onSubmit } = this.props;
+    const { question, file, inputChecked, result, onChange, onSubmit } = this.props;
     let Answer;
     switch (result.type) {
       case 'CORRECT':
@@ -53,10 +53,10 @@ class Question extends Component {
                     <Pane padding={majorScale(1)} key={index}>
                       <input
                         onChange={onChange}
-                        checked={inputsChecked[index]}
+                        checked={a.answer === inputChecked}
                         type="radio"
                         name="answer"
-                        value={index}
+                        value={a.answer}
                       />
                       {a.answer}
                       <br />
@@ -90,7 +90,7 @@ Question.propTypes = {
     answers: PropTypes.array.isRequired,
   }),
   file: PropTypes.string.isRequired,
-  inputsChecked: PropTypes.array.isRequired,
+  inputChecked: PropTypes.string.isRequired,
   result: PropTypes.oneOfType([
     PropTypes.shape({
       text: PropTypes.string.isRequired,

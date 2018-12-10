@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
 
-import javascriptResults from './javascript-results.reducer';
+import category from './category.reducer';
 
-const reducer = combineReducers({
-  javascriptResults,
-});
+const reducer = category;
 
 export default reducer;
