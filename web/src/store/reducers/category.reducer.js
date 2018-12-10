@@ -5,7 +5,9 @@ import actionTypes from '../actions/quiz/types.actions';
  * @param {Object} state
  * @param {Object} action
  * @param {String} action.type
- * @param {String} action.payload.category
+ * @param {String} action.category
+ * @param {String} action.index
+ * @param {String} action.payload
  * @returns {{}}
  */
 function category(state = {}, action) {
@@ -19,22 +21,18 @@ function category(state = {}, action) {
       category = action.payload.category;
       return { ...state, [category]: [] };
     case actionTypes.ADD_ANSWER:
-      category = action.payload.category;
-      console.group('Category');
-      console.log('category', category);
-      console.log('state', state);
-      console.groupEnd();
-      const { questionKey, subcategory, result } = action.payload;
+      category = action.category;
       return {
         ...state,
-        [category]: [
-          ...state[category],
-          {
-            questionKey,
-            subcategory,
-            result,
-          },
-        ],
+        [category]: [...state[category], action.payload],
+      };
+    case actionTypes.UPDATE_ANSWER:
+      category = action.category;
+      const categoryCopy = state[category].map(value => value);
+      categoryCopy[action.index] = action.payload;
+      return {
+        ...state,
+        [category]: categoryCopy,
       };
     default:
       return state;

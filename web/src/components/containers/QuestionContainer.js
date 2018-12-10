@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from 'presentational/Question';
 import { updateJavascriptResults } from 'actions/quiz';
-import { createCategory, addAnswerWithType } from '../../store/actions/quiz';
+import { createCategory, addAnswerWithType, updateAnswerWithType } from '../../store/actions/quiz';
 import * as FromCategory from '../../store/reducers/category.reducer';
 
 const questionResults = {
@@ -64,14 +64,19 @@ class QuestionPage extends Component {
     const {
       questionKey,
       category,
-      addAnswer,
       question: { subcategory },
+      addAnswer,
+      updateAnswer,
     } = this.props;
     const { result } = this.state;
 
     // Check state.category[] to verify if the user answer previously
     if (category.filter(answers => answers.questionKey === questionKey).length === 0) {
       addAnswer(questionKey, subcategory, result.type);
+    } else {
+      const answerKeys = category.map(answers => answers.questionKey);
+      const index = answerKeys.indexOf(questionKey);
+      updateAnswer(index, questionKey, subcategory, result.type);
     }
 
     // TODO(Adrian): Update answers if the answer is in the state
@@ -111,12 +116,16 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { location } = ownProps.history;
   const category = location.pathname.split('/')[1];
+  console.log('category', category);
   return {
     createCategory: () => {
       dispatch(createCategory({ category }));
     },
     addAnswer: (questionKey, subcategory, result) => {
       dispatch(addAnswerWithType(category)({ questionKey, subcategory, result }));
+    },
+    updateAnswer: (index, questionKey, subcategory, result) => {
+      dispatch(updateAnswerWithType(category)({ index, questionKey, subcategory, result }));
     },
   };
 };

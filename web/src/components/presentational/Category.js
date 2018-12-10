@@ -107,7 +107,7 @@ class Category extends React.Component {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
-                    to={`/${category.category}/${quiz.key}`}
+                    to={`/${category.name}/${quiz.key}`}
                   >
                     <Heading style={{ textAlign: 'center' }} size={700}>
                       {quiz.title}
@@ -125,7 +125,7 @@ class Category extends React.Component {
 Category.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.shape({
-    category: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     maximumDifficulty: PropTypes.number.isRequired,
     minimumDifficulty: PropTypes.number.isRequired,
     quizzes: PropTypes.arrayOf(

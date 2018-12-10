@@ -6,11 +6,18 @@ export const createCategory = action(actionTypes.CREATE_CATEGORY);
 
 /**
  * @description returned function receive category in mapStateToProps
- * @param type
- * @returns {function(*): function({questionKey: *, subcategory: *, result: *}): {type: *, payload: {questionKey: *, subcategory: *, result: *}}}
  */
 let addAnswer = type => category => ({ questionKey, subcategory, result }) => ({
   type,
-  payload: { questionKey, category, subcategory, result },
+  category,
+  payload: { questionKey, subcategory, result },
 });
 export const addAnswerWithType = addAnswer(actionTypes.ADD_ANSWER);
+
+let updateAnswer = type => category => ({ index, questionKey, subcategory, result }) => ({
+  type,
+  index,
+  category,
+  payload: { questionKey, subcategory, result },
+});
+export const updateAnswerWithType = updateAnswer(actionTypes.UPDATE_ANSWER);

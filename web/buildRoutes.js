@@ -2,13 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import dataIndex from '../data/index.json';
 
-// Route Format:
-// {
-//   path: string,
-//   getData: function
-//   component: 'pages/TestQuestion'
-// }
-
 const buildRoutes = () => {
   const { categories } = dataIndex;
   const categoryRoutes = [];

@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   const { category } = ownProps;
   console.log(category);
   return {
-    categoryAnswers: FromCategory.getCategory(state, category.category),
+    categoryAnswers: FromCategory.getCategory(state, category.name),
   };
 };
 
