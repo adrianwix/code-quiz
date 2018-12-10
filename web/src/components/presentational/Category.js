@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { Heading, majorScale } from 'evergreen-ui';
+import { Heading, majorScale, Tab, TabNavigation } from 'evergreen-ui';
 import { Link } from 'react-static';
 import Grid from 'presentational/Shared/Grid';
 import Row from 'presentational/Shared/Row';
@@ -67,10 +67,11 @@ class Category extends React.Component {
           </Cell>
         </Row>
         <Row>
+          <TabNavigation />
           {subcategories.map(subcategory => (
-            <div key={subcategory}>
-              <button onClick={this.handleFilter}>{subcategory}</button>
-            </div>
+            <Tab onClick={this.handleFilter} key={subcategory}>
+              {subcategory}
+            </Tab>
           ))}
         </Row>
         <Row>
@@ -85,8 +86,7 @@ class Category extends React.Component {
                 answerResult = answer.length === 0 ? 'PENDING' : answer[0].result;
               }
               const { border, background } = colors[answerResult];
-              console.log(categoryAnswers);
-              console.log(colors[answerResult]);
+
               return (
                 <Cell
                   style={{ border: `2px solid ${border}` }}
@@ -122,6 +122,7 @@ class Category extends React.Component {
   }
 }
 
+// TODO(Adrian): Actualize PropTypes
 Category.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.shape({

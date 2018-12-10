@@ -1,4 +1,4 @@
-import actionTypes from '../actions/quiz/types.actions';
+import actionTypes from 'actions/quiz/types.actions';
 
 /**
  *

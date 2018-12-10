@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from 'presentational/Question';
-import { updateJavascriptResults } from 'actions/quiz';
-import { createCategory, addAnswerWithType, updateAnswerWithType } from '../../store/actions/quiz';
-import * as FromCategory from '../../store/reducers/category.reducer';
+import { createCategory, addAnswerWithType, updateAnswerWithType } from 'actions/quiz';
+import * as FromCategory from 'reducers/category.reducer';
 
 const questionResults = {
   pending: {
@@ -78,8 +77,6 @@ class QuestionPage extends Component {
       const index = answerKeys.indexOf(questionKey);
       updateAnswer(index, questionKey, subcategory, result.type);
     }
-
-    // TODO(Adrian): Update answers if the answer is in the state
   };
 
   handleInputChange = e => {
