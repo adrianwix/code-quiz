@@ -1,0 +1,9 @@
+const NAMESPACE = '@CATEGORY/QUIZ';
+
+const actionTypes = {
+  CREATE_CATEGORY: `${NAMESPACE}/CREATE_CATEGORY`,
+  ADD_ANSWER: `${NAMESPACE}/ADD_ANSWER`,
+  UPDATE_ANSWER: `${NAMESPACE}/UPDATE_ANSWER`,
+};
+
+export default actionTypes;

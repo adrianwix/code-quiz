@@ -1,13 +1,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { Heading, majorScale } from 'evergreen-ui';
+import { Heading, majorScale, Tab, TabNavigation } from 'evergreen-ui';
 import { Link } from 'react-static';
 import Grid from 'presentational/Shared/Grid';
 import Row from 'presentational/Shared/Row';
 import Cell from 'presentational/Shared/Cell';
 import queryString from 'query-string';
-
-console.log('queryString', queryString);
 
 const colors = {
   CORRECT: {
@@ -30,9 +28,10 @@ const colors = {
 
 /**
  *
- * @param name
- * @param category
- * @param javascriptResults
+ * @param {Object} props
+ * @param {Object} props.name src: withRouteDate
+ * @param {Object} props.category src: withRouteDate
+ * @param {Object} props.categoryAnswers src: connect()
  * @returns {*}
  * @constructor
  */
@@ -46,9 +45,11 @@ class Category extends React.Component {
   };
 
   render() {
-    const { name, category, javascriptResults, history } = this.props;
+    const { name, category, categoryAnswers, history } = this.props;
     const { quizzes, subcategories } = category;
     const parsed = queryString.parse(history.location.search);
+
+    // TODO(Adrian): Filter logic should be in container
     return (
       <Grid>
         <Row>
@@ -66,19 +67,26 @@ class Category extends React.Component {
           </Cell>
         </Row>
         <Row>
+          <TabNavigation />
           {subcategories.map(subcategory => (
-            <div key={subcategory}>
-              <button onClick={this.handleFilter}>{subcategory}</button>
-            </div>
+            <Tab onClick={this.handleFilter} key={subcategory}>
+              {subcategory}
+            </Tab>
           ))}
         </Row>
         <Row>
           {quizzes
-            .filter(q => {
-              return q.subcategory.indexOf(parsed.filter || '') >= 0;
+            .filter(quiz => {
+              return quiz.subcategory.indexOf(parsed.filter || '') >= 0;
             })
-            .map((q, index) => {
-              const { border, background } = colors[javascriptResults[q.key]];
+            .map((quiz, index) => {
+              let answerResult = 'PENDING';
+              if (typeof categoryAnswers !== 'undefined') {
+                const answer = categoryAnswers.filter(answer => answer.questionKey === quiz.key);
+                answerResult = answer.length === 0 ? 'PENDING' : answer[0].result;
+              }
+              const { border, background } = colors[answerResult];
+
               return (
                 <Cell
                   style={{ border: `2px solid ${border}` }}
@@ -99,9 +107,11 @@ class Category extends React.Component {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
-                    to={`/${category.category}/${q.key}`}
+                    to={`/${category.name}/${quiz.key}`}
                   >
-                    <Heading size={700}>{q.title}</Heading>
+                    <Heading style={{ textAlign: 'center' }} size={700}>
+                      {quiz.title}
+                    </Heading>
                   </Link>
                 </Cell>
               );
@@ -112,10 +122,11 @@ class Category extends React.Component {
   }
 }
 
+// TODO(Adrian): Actualize PropTypes
 Category.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.shape({
-    category: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     maximumDifficulty: PropTypes.number.isRequired,
     minimumDifficulty: PropTypes.number.isRequired,
     quizzes: PropTypes.arrayOf(
@@ -126,6 +137,7 @@ Category.propTypes = {
       }),
     ),
   }).isRequired,
+  categoryAnswers: PropTypes.array,
 };
 
 export default Category;

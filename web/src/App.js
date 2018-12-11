@@ -9,7 +9,7 @@ import store from 'store/createStore';
 import Layout from 'presentational/Layout';
 import 'styles/app.css';
 
-store.dispatch({ type: '@codequiz/@@INIT', payload: {} });
+// store.dispatch({ type: '@codequiz/@@INIT', payload: {} });
 
 const App = () => (
   <Provider store={store}>

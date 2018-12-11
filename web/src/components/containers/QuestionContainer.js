@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from 'presentational/Question';
-import { updateJavascriptResults } from 'actions/quiz';
+import { createCategory, addAnswerWithType, updateAnswerWithType } from 'actions/quiz';
+import * as FromCategory from 'reducers/category.reducer';
 
 const questionResults = {
   pending: {
@@ -19,65 +20,78 @@ const questionResults = {
 };
 
 class QuestionPage extends Component {
+  /**
+   *
+   * @param {Object} props
+   * @param {Object} props.question src: withRouteDate
+   * @param {Object} props.file src: withRouteDate
+   * @param {Object} props.questionKey src: withRouteDate
+   */
   constructor(props) {
     super(props);
-    const initialArray = [];
-    props.question.answers.forEach((value, index) => {
-      initialArray[index] = false;
-    });
     this.state = {
       result: '',
-      inputsChecked: initialArray,
-      sentAnswerToReduxStore: false,
+      inputChecked: '',
     };
+  }
+
+  componentDidMount() {
+    const { category, createCategory } = this.props;
+    // Add new category to state if it doesn't exist
+    if (!category) {
+      createCategory();
+    }
   }
 
   validate = e => {
     e.preventDefault();
-    //We could use querySelector on a reference to the form element instead of document...
+    const { question } = this.props;
+    const { inputChecked } = this.state;
+    const { correctAnswer } = question;
     let result = '';
-    const userAnswerIndex = this.state.inputsChecked.findIndex(checked => checked);
-    if (userAnswerIndex >= 0) {
-      const isCorrectAnswer = this.props.question.answers[userAnswerIndex].isCorrect;
-      result = isCorrectAnswer ? questionResults.correct : questionResults.wrong;
-      this.setState({ result }, this.updateReduxState);
-    } else {
+
+    if (inputChecked === '') {
       result = questionResults.pending;
+      this.setState({ result }, this.updateReduxState);
+    } else if (inputChecked !== '') {
+      result = inputChecked === correctAnswer ? questionResults.correct : questionResults.wrong;
       this.setState({ result }, this.updateReduxState);
     }
   };
 
   updateReduxState = () => {
-    if (!this.state.sentAnswerToReduxStore) {
-      //testing action creator
-      const payload = {};
-      payload[this.props.questionKey] = this.state.result.type;
-      this.props.updateJavascript(payload);
-      //if we submitted an answer we want to prevent further submission to redux
-      if (this.state.result.type !== 'PENDING') {
-        this.setState({ sentAnswerToReduxStore: true });
-      }
+    const {
+      questionKey,
+      category,
+      question: { subcategory },
+      addAnswer,
+      updateAnswer,
+    } = this.props;
+    const { result } = this.state;
+
+    // Check state.category[] to verify if the user answer previously
+    if (category.filter(answers => answers.questionKey === questionKey).length === 0) {
+      addAnswer(questionKey, subcategory, result.type);
+    } else {
+      const answerKeys = category.map(answers => answers.questionKey);
+      const index = answerKeys.indexOf(questionKey);
+      updateAnswer(index, questionKey, subcategory, result.type);
     }
   };
 
   handleInputChange = e => {
-    const index = e.target.value;
-    this.setState(state => {
-      const cleanArray = state.inputsChecked.map(i => false);
-      cleanArray[index] = true;
-      return { inputsChecked: cleanArray };
-    });
+    this.setState({ inputChecked: e.target.value });
   };
 
   render() {
     const { question, file } = this.props;
-    const { inputsChecked, result } = this.state;
+    const { inputChecked, result } = this.state;
 
     return (
       <Question
         question={question}
         file={file}
-        inputsChecked={inputsChecked}
+        inputChecked={inputChecked}
         result={result}
         onChange={this.handleInputChange}
         onSubmit={this.validate}
@@ -86,15 +100,34 @@ class QuestionPage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+// TODO(Adrian): Add propTypes
+
+const mapStateToProps = (state, ownProps) => {
+  const { location } = ownProps.history;
+  const category = location.pathname.split('/')[1];
   return {
-    updateJavascript: payload => {
-      dispatch(updateJavascriptResults(payload));
+    category: FromCategory.getCategory(state, category),
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { location } = ownProps.history;
+  const category = location.pathname.split('/')[1];
+  console.log('category', category);
+  return {
+    createCategory: () => {
+      dispatch(createCategory({ category }));
+    },
+    addAnswer: (questionKey, subcategory, result) => {
+      dispatch(addAnswerWithType(category)({ questionKey, subcategory, result }));
+    },
+    updateAnswer: (index, questionKey, subcategory, result) => {
+      dispatch(updateAnswerWithType(category)({ index, questionKey, subcategory, result }));
     },
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(QuestionPage);

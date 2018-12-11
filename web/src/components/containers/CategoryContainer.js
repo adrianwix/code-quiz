@@ -1,11 +1,15 @@
-import Category from '../presentational/Category';
+import Category from 'presentational/Category';
 import { connect } from 'react-redux';
-import { getJavasScriptResults } from 'reducers/selectors';
+import * as FromCategory from 'reducers/category.reducer';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const { category } = ownProps;
+
   return {
-    javascriptResults: getJavasScriptResults(state),
+    categoryAnswers: FromCategory.getCategory(state, category.name),
   };
 };
+
+// TODO(Adrian): Add PropTypes
 
 export default connect(mapStateToProps)(Category);
