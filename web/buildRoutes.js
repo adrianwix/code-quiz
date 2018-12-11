@@ -39,6 +39,7 @@ const buildRoutes = () => {
           question,
           file,
           questionKey: q.key,
+          subcategory: q.subcategory,
         }),
         component: 'src/components/pages/Question',
       };

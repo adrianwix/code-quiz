@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Question from 'presentational/Question';
-import { createCategory, addAnswerWithType, updateAnswerWithType } from 'actions/quiz';
+import { createCategory, addAnswer, updateAnswer } from 'actions/quiz';
 import * as FromCategory from 'reducers/category.reducer';
 
 const questionResults = {
@@ -19,13 +20,14 @@ const questionResults = {
   },
 };
 
-class QuestionPage extends Component {
+class QuestionContainer extends Component {
   /**
    *
    * @param {Object} props
    * @param {Object} props.question src: withRouteDate
    * @param {Object} props.file src: withRouteDate
    * @param {Object} props.questionKey src: withRouteDate
+   * @param {Object} props.subcategory src: withRouteDate
    */
   constructor(props) {
     super(props);
@@ -60,13 +62,7 @@ class QuestionPage extends Component {
   };
 
   updateReduxState = () => {
-    const {
-      questionKey,
-      category,
-      question: { subcategory },
-      addAnswer,
-      updateAnswer,
-    } = this.props;
+    const { questionKey, category, subcategory, addAnswer, updateAnswer } = this.props;
     const { result } = this.state;
 
     // Check state.category[] to verify if the user answer previously
@@ -100,7 +96,30 @@ class QuestionPage extends Component {
   }
 }
 
-// TODO(Adrian): Add propTypes
+QuestionContainer.propTypes = {
+  createCategory: PropTypes.func.isRequired, // src: Redux connect()
+  addAnswer: PropTypes.func.isRequired, // src: Redux connect()
+  updateAnswer: PropTypes.func.isRequired, // src: Redux connect()
+  category: PropTypes.arrayOf(
+    // src: Redux connect()
+    PropTypes.shape({
+      subcategory: PropTypes.string.isRequired,
+      questionKey: PropTypes.string.isRequired,
+      result: PropTypes.string.isRequired,
+    }),
+  ),
+  question: PropTypes.shape({
+    // src: withRouteDate
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    questionFile: PropTypes.string.isRequired,
+    difficulty: PropTypes.number.isRequired,
+    answers: PropTypes.array.isRequired,
+  }).isRequired,
+  file: PropTypes.string.isRequired, // src: withRouteDate
+  questionKey: PropTypes.string.isRequired, // src: withRouteDate
+  subcategory: PropTypes.string.isRequired, // src: withRouteDate
+};
 
 const mapStateToProps = (state, ownProps) => {
   const { location } = ownProps.history;
@@ -119,10 +138,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(createCategory({ category }));
     },
     addAnswer: (questionKey, subcategory, result) => {
-      dispatch(addAnswerWithType(category)({ questionKey, subcategory, result }));
+      dispatch(addAnswer(category)({ questionKey, subcategory, result }));
     },
     updateAnswer: (index, questionKey, subcategory, result) => {
-      dispatch(updateAnswerWithType(category)({ index, questionKey, subcategory, result }));
+      dispatch(updateAnswer(category)({ index, questionKey, subcategory, result }));
     },
   };
 };
@@ -130,4 +149,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(QuestionPage);
+)(QuestionContainer);

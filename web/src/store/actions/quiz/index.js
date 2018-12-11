@@ -9,20 +9,18 @@ export const createCategory = action(actionTypes.CREATE_CATEGORY);
 /**
  * @description returned function receive category in mapStateToProps of <QuestionContainer />
  */
-let addAnswer = type => category => ({ questionKey, subcategory, result }) => ({
-  type,
+export const addAnswer = category => ({ questionKey, subcategory, result }) => ({
+  type: actionTypes.ADD_ANSWER,
   category,
   payload: { questionKey, subcategory, result },
 });
-export const addAnswerWithType = addAnswer(actionTypes.ADD_ANSWER);
 
 /**
  * @description returned function receive category in mapStateToProps of <QuestionContainer />
  */
-let updateAnswer = type => category => ({ index, questionKey, subcategory, result }) => ({
-  type,
+export const updateAnswer = category => ({ index, questionKey, subcategory, result }) => ({
+  type: actionTypes.UPDATE_ANSWER,
   index,
   category,
   payload: { questionKey, subcategory, result },
 });
-export const updateAnswerWithType = updateAnswer(actionTypes.UPDATE_ANSWER);

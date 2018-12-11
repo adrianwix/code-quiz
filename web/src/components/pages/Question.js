@@ -1,4 +1,4 @@
 import { withRouteData } from 'react-static';
-import Question from 'containers/QuestionContainer';
+import QuestionContainer from 'containers/QuestionContainer';
 
-export default withRouteData(Question);
+export default withRouteData(QuestionContainer);

@@ -3,7 +3,6 @@
 	"description": "Understand the - operator coercion",
 	"questionFile": "question.js",
 	"difficulty": 1,
-	"subcategory": "coercion",
 	"correctAnswer": "1 NaN 2",
 	"answers": [
 		{

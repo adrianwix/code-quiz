@@ -5,7 +5,6 @@ import { Link } from 'react-static';
 import Grid from 'presentational/Shared/Grid';
 import Row from 'presentational/Shared/Row';
 import Cell from 'presentational/Shared/Cell';
-import queryString from 'query-string';
 
 const colors = {
   CORRECT: {
@@ -36,18 +35,9 @@ const colors = {
  * @constructor
  */
 class Category extends React.Component {
-  handleFilter = event => {
-    const { history } = this.props;
-    const currentPath = history.location.pathname;
-    const filter = event.target.innerText;
-    const location = filter === 'all' ? `${currentPath}` : `${currentPath}?filter=${filter}`;
-    history.push(location);
-  };
-
   render() {
-    const { name, category, categoryAnswers, history } = this.props;
-    const { quizzes, subcategories } = category;
-    const parsed = queryString.parse(history.location.search);
+    const { name, category, categoryAnswers, quizzes, filter, handleFilter } = this.props;
+    const { subcategories } = category;
 
     // TODO(Adrian): Filter logic should be in container
     return (
@@ -69,53 +59,53 @@ class Category extends React.Component {
         <Row>
           <TabNavigation />
           {subcategories.map(subcategory => (
-            <Tab onClick={this.handleFilter} key={subcategory}>
+            <Tab
+              isSelected={subcategory === (filter ? filter : 'all')}
+              onClick={e => handleFilter(e)}
+              key={subcategory}
+            >
               {subcategory}
             </Tab>
           ))}
         </Row>
         <Row>
-          {quizzes
-            .filter(quiz => {
-              return quiz.subcategory.indexOf(parsed.filter || '') >= 0;
-            })
-            .map((quiz, index) => {
-              let answerResult = 'PENDING';
-              if (typeof categoryAnswers !== 'undefined') {
-                const answer = categoryAnswers.filter(answer => answer.questionKey === quiz.key);
-                answerResult = answer.length === 0 ? 'PENDING' : answer[0].result;
-              }
-              const { border, background } = colors[answerResult];
+          {quizzes.map((quiz, index) => {
+            let answerResult = 'PENDING';
+            if (typeof categoryAnswers !== 'undefined') {
+              const answer = categoryAnswers.filter(answer => answer.questionKey === quiz.key);
+              answerResult = answer.length === 0 ? 'PENDING' : answer[0].result;
+            }
+            const { border, background } = colors[answerResult];
 
-              return (
-                <Cell
-                  style={{ border: `2px solid ${border}` }}
-                  background={background}
-                  borderRadius={majorScale(2)}
-                  height={250}
-                  hoverElevation={3}
-                  columns={4}
-                  key={index}
+            return (
+              <Cell
+                style={{ border: `2px solid ${border}` }}
+                background={background}
+                borderRadius={majorScale(2)}
+                height={250}
+                hoverElevation={3}
+                columns={4}
+                key={index}
+              >
+                <Link
+                  style={{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  to={`/${category.name}/${quiz.key}`}
                 >
-                  <Link
-                    style={{
-                      color: 'inherit',
-                      textDecoration: 'none',
-                      width: '100%',
-                      height: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                    to={`/${category.name}/${quiz.key}`}
-                  >
-                    <Heading style={{ textAlign: 'center' }} size={700}>
-                      {quiz.title}
-                    </Heading>
-                  </Link>
-                </Cell>
-              );
-            })}
+                  <Heading style={{ textAlign: 'center' }} size={700}>
+                    {quiz.title}
+                  </Heading>
+                </Link>
+              </Cell>
+            );
+          })}
         </Row>
       </Grid>
     );
@@ -138,6 +128,7 @@ Category.propTypes = {
     ),
   }).isRequired,
   categoryAnswers: PropTypes.array,
+  handleFilter: PropTypes.func.isRequired,
 };
 
 export default Category;

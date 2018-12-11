@@ -3,7 +3,6 @@
 	"description": "Solve a simple addition",
 	"questionFile": "question.js",
 	"difficulty": 1,
-	"subcategory": "arithmetic",
 	"correctAnswer": "5",
 	"answers": [
 		{

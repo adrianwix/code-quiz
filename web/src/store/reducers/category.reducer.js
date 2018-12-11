@@ -28,7 +28,7 @@ function category(state = {}, action) {
       };
     case actionTypes.UPDATE_ANSWER:
       category = action.category;
-      const categoryCopy = state[category].map(value => value);
+      const categoryCopy = [...state[category]];
       categoryCopy[action.index] = action.payload;
       return {
         ...state,

@@ -15,7 +15,7 @@
     "json-loader": "^0.5.7",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
-    "query-string": "^6.2.0",
+    "query-string": "5",
     "react": "latest",
     "react-dom": "latest",
     "react-hot-loader": "latest",
