@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Question from 'presentational/Question';
 import { createCategory, addAnswer, updateAnswer } from 'actions/quiz';
 import * as FromCategory from 'reducers/category.reducer';
+import { Link } from 'react-static';
 
 const questionResults = {
   pending: {
@@ -38,9 +39,9 @@ class QuestionContainer extends Component {
   }
 
   componentDidMount() {
-    const { category, createCategory } = this.props;
+    const { categoryAnswers, createCategory } = this.props;
     // Add new category to state if it doesn't exist
-    if (!category) {
+    if (!categoryAnswers) {
       createCategory();
     }
   }
@@ -62,14 +63,14 @@ class QuestionContainer extends Component {
   };
 
   updateReduxState = () => {
-    const { questionKey, category, subcategory, addAnswer, updateAnswer } = this.props;
+    const { questionKey, categoryAnswers, subcategory, addAnswer, updateAnswer } = this.props;
     const { result } = this.state;
 
     // Check state.category[] to verify if the user answer previously
-    if (category.filter(answers => answers.questionKey === questionKey).length === 0) {
+    if (categoryAnswers.filter(answers => answers.questionKey === questionKey).length === 0) {
       addAnswer(questionKey, subcategory, result.type);
     } else {
-      const answerKeys = category.map(answers => answers.questionKey);
+      const answerKeys = categoryAnswers.map(answers => answers.questionKey);
       const index = answerKeys.indexOf(questionKey);
       updateAnswer(index, questionKey, subcategory, result.type);
     }
@@ -80,18 +81,36 @@ class QuestionContainer extends Component {
   };
 
   render() {
-    const { question, file } = this.props;
+    const { question, file, quizzes, category } = this.props;
     const { inputChecked, result } = this.state;
+    const currentIndex = quizzes.findIndex(quizz => {
+      return quizz.title === question.title;
+    });
 
     return (
-      <Question
-        question={question}
-        file={file}
-        inputChecked={inputChecked}
-        result={result}
-        onChange={this.handleInputChange}
-        onSubmit={this.validate}
-      />
+      <div>
+        <Link to={`/${category}`}>
+          <button>Back</button>
+        </Link>
+        {currentIndex > 0 && (
+          <Link to={`/${category}/${quizzes[currentIndex - 1].key}`}>
+            <button>Previous</button>
+          </Link>
+        )}
+        {currentIndex < quizzes.length - 1 && (
+          <Link to={`/${category}/${quizzes[currentIndex + 1].key}`}>
+            <button>Next</button>
+          </Link>
+        )}
+        <Question
+          question={question}
+          file={file}
+          inputChecked={inputChecked}
+          result={result}
+          onChange={this.handleInputChange}
+          onSubmit={this.validate}
+        />
+      </div>
     );
   }
 }
@@ -100,7 +119,7 @@ QuestionContainer.propTypes = {
   createCategory: PropTypes.func.isRequired, // src: Redux connect()
   addAnswer: PropTypes.func.isRequired, // src: Redux connect()
   updateAnswer: PropTypes.func.isRequired, // src: Redux connect()
-  category: PropTypes.arrayOf(
+  categoryAnswers: PropTypes.arrayOf(
     // src: Redux connect()
     PropTypes.shape({
       subcategory: PropTypes.string.isRequired,
@@ -125,7 +144,8 @@ const mapStateToProps = (state, ownProps) => {
   const { location } = ownProps.history;
   const category = location.pathname.split('/')[1];
   return {
-    category: FromCategory.getCategory(state, category),
+    categoryAnswers: FromCategory.getCategory(state, category),
+    category,
   };
 };
 

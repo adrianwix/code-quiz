@@ -12,7 +12,6 @@ const buildRoutes = () => {
     const categoryPath = path.resolve(__dirname, `../data/${c.key}/index.json`);
     const category = require(categoryPath);
     const { quizzes } = category;
-
     const categoryRoute = {
       path: `/${c.key}`,
       getData: () => ({
@@ -32,12 +31,12 @@ const buildRoutes = () => {
         `../data/${c.key}/${q.key}/${question.questionFile}`,
       );
       const file = fs.readFileSync(filePath, { encoding: 'utf8' });
-
       const questionRoute = {
         path: `/${c.key}/${q.key}`,
         getData: () => ({
           question,
           file,
+          quizzes: category.quizzes,
           questionKey: q.key,
           subcategory: q.subcategory,
         }),
