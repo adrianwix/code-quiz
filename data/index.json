@@ -1,8 +1,12 @@
 {
-  "categories": [
-    {
-      "name": "JavaScript",
-      "key": "javascript"
-    }
-  ]
+	"categories": [
+		{
+			"name": "JavaScript",
+			"key": "javascript"
+		},
+		{
+			"name": "MongoDB",
+			"key": "mongodb"
+		}
+	]
 }

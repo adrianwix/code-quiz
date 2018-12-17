@@ -1,0 +1,21 @@
+{
+	"title": "Update",
+	"description": "Modifying a document",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "{ $set: { qty: 4 } }",
+	"answers": [
+		{
+			"answer": "{ $set: { qty: 4 } }"
+		},
+		{
+			"answer": "{ qty: 4 }"
+		},
+		{
+			"answer": "{ $set: { qty += 2 } }"
+		},
+		{
+			"answer": "{ $inc: { qty: 4 } }"
+		}
+	]
+}

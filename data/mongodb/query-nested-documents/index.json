@@ -1,0 +1,21 @@
+{
+	"title": "Query a nested document",
+	"description": "",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "{ skills: \"Fireball\", \"attributes.mana\": 70 }",
+	"answers": [
+		{
+			"answer": "{ name: \"Fire Man\", attributes: { strength: 90, speed: 70 } }"
+		},
+		{
+			"answer": "{ name: \"Fire Man\", skills: \"Fireblade\", \"attributes.endurance\": 60 }"
+		},
+		{
+			"answer": "{ skills: \"Fireball\", \"attributes.mana\": 70 }"
+		},
+		{
+			"answer": "{ \"hero.active\": true }"
+		}
+	]
+}

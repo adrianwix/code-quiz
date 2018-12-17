@@ -9,7 +9,7 @@ const buildRoutes = () => {
 
   // TODO: make category root paths - i.e. /javascript to hold all JS quizzes
   categories.forEach(c => {
-    const categoryPath = path.resolve(__dirname, `../data/${c.key}/index.json`);
+    const categoryPath = path.resolve(__dirname, `../data/${c.key}/category.json`);
     const category = require(categoryPath);
     const { quizzes } = category;
     const categoryRoute = {

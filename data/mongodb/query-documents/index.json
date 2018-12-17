@@ -1,0 +1,27 @@
+{
+	"title": "Query a document",
+	"description": "Which document will be returned",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "{ _id: 6, a: 8, b: 3, c: 0 }",
+	"answers": [
+		{
+			"answer": "{ _id: 1, a: 5, b: 7, c: 1 }"
+		},
+		{
+			"answer": "{ _id: 2, a: 4, b: 5, c: 2 }"
+		},
+		{
+			"answer": "{ _id: 3, a: 9, b: 2, c: 1 }"
+		},
+		{
+			"answer": "{ _id: 4, a: 3, b: 1, c: 2 }"
+		},
+		{
+			"answer": "{ _id: 5, a: 2, b: 3, c: 1 }"
+		},
+		{
+			"answer": "{ _id: 6, a: 8, b: 3, c: 0 }"
+		}
+	]
+}

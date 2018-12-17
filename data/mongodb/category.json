@@ -1,0 +1,69 @@
+{
+	"name": "mongodb",
+	"description": "MongoDB database using Node.js native driver",
+	"subcategories": ["all", "CRUD", "Aggregation", "Indexes"],
+	"quizzes": [
+		{
+			"title": "Insert One",
+			"key": "insert-one",
+			"tags": ["beginner", "create"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Insert Many",
+			"key": "insert-many",
+			"tags": ["beginner", "create"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Query Documents",
+			"key": "query-documents",
+			"tags": ["beginner", "read"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Query Nested Documents",
+			"key": "query-nested-documents",
+			"tags": ["beginner", "read"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Query an Array",
+			"key": "query-an-array",
+			"tags": ["beginner", "read"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Project Fields",
+			"key": "project-fields",
+			"tags": ["beginner", "read"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Query on Null",
+			"key": "query-on-null",
+			"tags": ["beginner", "read"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Update",
+			"key": "update",
+			"tags": ["beginner", "update"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Delete One",
+			"key": "delete-one",
+			"tags": ["beginner", "delete"],
+			"subcategory": "CRUD"
+		},
+		{
+			"title": "Delete Many",
+			"key": "delete-many",
+			"tags": ["beginner", "delete"],
+			"subcategory": "CRUD"
+		}
+	],
+	"minimumDifficulty": 1,
+	"maximumDifficulty": 10
+}

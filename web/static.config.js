@@ -2,6 +2,7 @@ import React from 'react';
 import { extractStyles } from 'evergreen-ui';
 import path from 'path';
 import buildRoutes from './buildRoutes';
+import frontmatter from './frontmatter';
 
 const alias = {
   containers: path.resolve(__dirname, './src/components/containers'),
@@ -51,6 +52,7 @@ export default {
         path: '/',
         component: 'src/components/pages/Home',
       },
+      frontmatter,
     ];
   },
   webpack: config => {

@@ -5,8 +5,12 @@ import PropTypes from 'prop-types';
 
 const Header = props => {
   const { location } = props;
-
-  const navLinks = [{ to: '/', label: 'Home' }, { to: '/javascript', label: 'Javascript' }];
+  // TODO(Adrian): We need to make a route to a category selection page instead of naming them here
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/javascript', label: 'Javascript' },
+    { to: '/mongodb', label: 'MongoDB' },
+  ];
   return (
     <header>
       <Pane display={'flex'} borderBottom={'default'} elevation={1} padding={majorScale(2)}>

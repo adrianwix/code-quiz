@@ -123,7 +123,7 @@ Category.propTypes = {
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired,
-        categories: PropTypes.array.isRequired,
+        tags: PropTypes.array.isRequired,
       }),
     ),
   }).isRequired,

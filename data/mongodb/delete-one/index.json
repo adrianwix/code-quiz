@@ -1,0 +1,21 @@
+{
+	"title": "Delete One",
+	"description": "Use deleteOne() to delete documents",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "Document with _id == 7 will be delete",
+	"answers": [
+		{
+			"answer": "db.collection.deleteOne() can be use on a capped collection"
+		},
+		{
+			"answer": "All documents qty == 1 will be deleted"
+		},
+		{
+			"answer": "Document with weapons == bow will be delete"
+		},
+		{
+			"answer": "Document with _id == 7 will be delete"
+		}
+	]
+}

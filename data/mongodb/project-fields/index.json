@@ -1,0 +1,21 @@
+{
+	"title": "Project Fields",
+	"description": "Returning required fields",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "weapon and _id field will be returned",
+	"answers": [
+		{
+			"answer": "qty and _id field will be returned"
+		},
+		{
+			"answer": "weapon and _id field will be returned"
+		},
+		{
+			"answer": "_id field won't be returned"
+		},
+		{
+			"answer": "weapon and qty field will be returned"
+		}
+	]
+}
