@@ -1,5 +1,5 @@
 {
-	"title": "Query an array",
+	"title": "Query an Array",
 	"description": "Which value should hold 'query' to return 'hero' object",
 	"questionFile": "question.js",
 	"difficulty": 1,

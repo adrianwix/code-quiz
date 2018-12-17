@@ -117,15 +117,18 @@ Category.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    maximumDifficulty: PropTypes.number.isRequired,
-    minimumDifficulty: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    subcategories: PropTypes.array.isRequired,
     quizzes: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired,
+        subcategory: PropTypes.string.isRequired,
         tags: PropTypes.array.isRequired,
       }),
     ),
+    minimumDifficulty: PropTypes.number.isRequired,
+    maximumDifficulty: PropTypes.number.isRequired,
   }).isRequired,
   categoryAnswers: PropTypes.array,
   handleFilter: PropTypes.func.isRequired,

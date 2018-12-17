@@ -1,5 +1,5 @@
 {
-	"title": "Query a document",
+	"title": "Query a Document",
 	"description": "Which document will be returned",
 	"questionFile": "question.js",
 	"difficulty": 1,
