@@ -1,0 +1,21 @@
+{
+	"title": "Insert Many",
+	"description": "insertMany() behavior",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "Ordered inserts are slower",
+	"answers": [
+		{
+			"answer": "If (options.ordered = true) mongo will trown an error an insert 3 documents"
+		},
+		{
+			"answer": "If (options.ordered = false) mongo will trown an error an insert 1 documents"
+		},
+		{
+			"answer": "Ordered inserts are slower"
+		},
+		{
+			"answer": "Unordered insert will stop executing at the first error"
+		}
+	]
+}

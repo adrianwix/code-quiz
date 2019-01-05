@@ -1,0 +1,21 @@
+{
+	"title": "Query an Array",
+	"description": "Which value should hold 'query' to return 'hero' object",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "{ skills: { $all: [\"flamethrower\", \"flameshield\"] } }",
+	"answers": [
+		{
+			"answer": "{ skills: [\"flamethrower\", \"flameshield\", \"fireball\", \"fireblade\"] }"
+		},
+		{
+			"answer": "{ skills: { $size: 3 } }"
+		},
+		{
+			"answer": "{ skills: { $all: [\"flamesword\", \"flameshield\"] } }"
+		},
+		{
+			"answer": "{ skills: { $all: [\"flamethrower\", \"flameshield\"] } }"
+		}
+	]
+}

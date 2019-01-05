@@ -1,0 +1,21 @@
+{
+	"title": "Delete Many",
+	"description": "Using deleteMany()",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "result.deleteCount == 3",
+	"answers": [
+		{
+			"answer": "result.deleteCount == 3"
+		},
+		{
+			"answer": "Only the first item that match the query will be deleted"
+		},
+		{
+			"answer": "deleteMany() can be use in capped collections"
+		},
+		{
+			"answer": "deleteMany() accept a projections object as a second argument"
+		}
+	]
+}
