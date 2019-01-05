@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Heading, majorScale, Tab, TabNavigation } from 'evergreen-ui';
-import { Link } from 'react-static';
+import { Link } from 'react-router-dom';
 import Grid from 'presentational/Shared/Grid';
 import Row from 'presentational/Shared/Row';
 import Cell from 'presentational/Shared/Cell';
@@ -117,15 +117,18 @@ Category.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    maximumDifficulty: PropTypes.number.isRequired,
-    minimumDifficulty: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    subcategories: PropTypes.array.isRequired,
     quizzes: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired,
-        categories: PropTypes.array.isRequired,
+        subcategory: PropTypes.string.isRequired,
+        tags: PropTypes.array.isRequired,
       }),
     ),
+    minimumDifficulty: PropTypes.number.isRequired,
+    maximumDifficulty: PropTypes.number.isRequired,
   }).isRequired,
   categoryAnswers: PropTypes.array,
   handleFilter: PropTypes.func.isRequired,

@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link, withRouter } from 'react-static';
+import { Link, withRouter } from 'react-router-dom';
 import { Heading, majorScale, Pane, Tab, TabNavigation } from 'evergreen-ui';
 import PropTypes from 'prop-types';
+
+const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/javascript', label: 'Javascript' },
+  { to: '/mongodb', label: 'MongoDB' },
+];
 
 const Header = props => {
   const { location } = props;
 
-  const navLinks = [{ to: '/', label: 'Home' }, { to: '/javascript', label: 'Javascript' }];
   return (
     <header>
       <Pane display={'flex'} borderBottom={'default'} elevation={1} padding={majorScale(2)}>

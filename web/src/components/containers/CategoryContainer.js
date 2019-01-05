@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Category from 'presentational/Category';
 import { connect } from 'react-redux';
 import * as FromCategory from 'reducers/category.reducer';
@@ -45,4 +46,4 @@ const mapStateToProps = (state, ownProps) => {
 
 // TODO(Adrian): Add PropTypes
 
-export default connect(mapStateToProps)(CategoryContainer);
+export default withRouter(connect(mapStateToProps)(CategoryContainer));
