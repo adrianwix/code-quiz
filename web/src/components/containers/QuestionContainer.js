@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Question from 'presentational/Question';
 import { createCategory, addAnswer, updateAnswer } from 'actions/quiz';
 import * as FromCategory from 'reducers/category.reducer';
-import { Link } from 'react-static';
 
 const questionResults = {
   pending: {
@@ -83,30 +83,21 @@ class QuestionContainer extends Component {
   render() {
     const { question, file, quizzes, category } = this.props;
     const { inputChecked, result } = this.state;
-    const currentIndex = quizzes.findIndex(quizz => {
-      return quizz.title === question.title;
-    });
+    // This fails when the title in category/index.json is different from category/question/index.json
+    // const currentIndex = quizzes.findIndex(quiz => quiz.title === question.title);
+    // TODO(Adrian): avoid repeating data
+    const currentIndex = quizzes.findIndex(quiz => quiz.title === question.title);
 
     return (
       <div>
-        <Link to={`/${category}`}>
-          <button>Back</button>
-        </Link>
-        {currentIndex > 0 && (
-          <Link to={`/${category}/${quizzes[currentIndex - 1].key}`}>
-            <button>Previous</button>
-          </Link>
-        )}
-        {currentIndex < quizzes.length - 1 && (
-          <Link to={`/${category}/${quizzes[currentIndex + 1].key}`}>
-            <button>Next</button>
-          </Link>
-        )}
         <Question
           question={question}
           file={file}
           inputChecked={inputChecked}
           result={result}
+          category={category} // QuestionNav
+          currentIndex={currentIndex} // QuestionNav
+          quizzes={quizzes} // QuestionNav
           onChange={this.handleInputChange}
           onSubmit={this.validate}
         />
@@ -115,6 +106,7 @@ class QuestionContainer extends Component {
   }
 }
 
+// TODO(Adrian): category and quizzes is not in propTypes
 QuestionContainer.propTypes = {
   createCategory: PropTypes.func.isRequired, // src: Redux connect()
   addAnswer: PropTypes.func.isRequired, // src: Redux connect()
@@ -135,6 +127,14 @@ QuestionContainer.propTypes = {
     difficulty: PropTypes.number.isRequired,
     answers: PropTypes.array.isRequired,
   }).isRequired,
+  quizzes: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      key: PropTypes.string.isRequired,
+      subcategory: PropTypes.string.isRequired,
+      tags: PropTypes.array.isRequired,
+    }),
+  ),
   file: PropTypes.string.isRequired, // src: withRouteDate
   questionKey: PropTypes.string.isRequired, // src: withRouteDate
   subcategory: PropTypes.string.isRequired, // src: withRouteDate
@@ -152,7 +152,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { location } = ownProps.history;
   const category = location.pathname.split('/')[1];
-  console.log('category', category);
+  // console.log('category', category);
   return {
     createCategory: () => {
       dispatch(createCategory({ category }));
@@ -166,7 +166,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuestionContainer);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(QuestionContainer),
+);

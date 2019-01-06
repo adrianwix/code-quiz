@@ -6,6 +6,7 @@ import Grid from 'presentational/Shared/Grid';
 import Row from 'presentational/Shared/Row';
 import Cell from 'presentational/Shared/Cell';
 import 'styles/prism.css';
+import QuestionNav from './QuestionNav';
 
 class Question extends Component {
   componentDidMount() {
@@ -16,7 +17,17 @@ class Question extends Component {
     Prism.highlightAll();
   }
   render() {
-    const { question, file, inputChecked, result, onChange, onSubmit } = this.props;
+    const {
+      question,
+      file,
+      inputChecked,
+      result,
+      category,
+      currentIndex,
+      quizzes,
+      onChange,
+      onSubmit,
+    } = this.props;
     let Answer;
     switch (result.type) {
       case 'CORRECT':
@@ -33,6 +44,11 @@ class Question extends Component {
     }
     return (
       <Grid elevation={1} margin={majorScale(2)}>
+        <Row>
+          <Cell padding={majorScale(2)} background={'lightest'} columns={6} offset={4}>
+            <QuestionNav category={category} currentIndex={currentIndex} quizzes={quizzes} />
+          </Cell>
+        </Row>
         <Row>
           <Cell padding={majorScale(2)} background={'lightest'} columns={6} offset={4}>
             <Heading size={900}>{question.title}</Heading>
@@ -69,7 +85,7 @@ class Question extends Component {
                   marginTop={majorScale(2)}
                   appearance="primary"
                 >
-                  Primary
+                  Submit
                 </Button>
               </form>
             </Card>
@@ -98,6 +114,16 @@ Question.propTypes = {
     }),
     PropTypes.oneOf(['']),
   ]),
+  category: PropTypes.string.isRequired,
+  currentIndex: PropTypes.number.isRequired,
+  quizzes: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      key: PropTypes.string.isRequired,
+      subcategory: PropTypes.string.isRequired,
+      tags: PropTypes.array.isRequired,
+    }),
+  ),
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };

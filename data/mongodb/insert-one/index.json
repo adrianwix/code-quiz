@@ -1,0 +1,21 @@
+{
+	"title": "Insert One",
+	"description": "Create Operation",
+	"questionFile": "question.js",
+	"difficulty": 1,
+	"correctAnswer": "MongoDB will create an _id field",
+	"answers": [
+		{
+			"answer": "result.insertedCount === '1'"
+		},
+		{
+			"answer": "The write concern of the operation is 1 by default"
+		},
+		{
+			"answer": "MongoDB will create an _id field"
+		},
+		{
+			"answer": "Average attributes point is Math.round(72.5)"
+		}
+	]
+}

@@ -1,20 +1,9 @@
 import React from 'react';
 import { extractStyles } from 'evergreen-ui';
-import path from 'path';
 import buildRoutes from './buildRoutes';
 
-const alias = {
-  containers: path.resolve(__dirname, './src/components/containers'),
-  presentational: path.resolve(__dirname, './src/components/presentational'),
-  store: path.resolve(__dirname, './src/store'),
-  actions: path.resolve(__dirname, './src/store/actions'),
-  reducers: path.resolve(__dirname, './src/store/reducers'),
-  styles: path.resolve(__dirname, './src/styles'),
-  public: path.resolve(__dirname, './public'),
-};
-
 export default {
-  renderToHtml: (render, Comp, meta) => {
+  beforeRenderToHtml: (render, Comp, meta) => {
     const { css, hydrationScript } = extractStyles();
     // The styles are collected from each page component
     const html = render(<Comp />);
@@ -42,8 +31,7 @@ export default {
   getRoutes: () => {
     const routes = buildRoutes();
 
-    console.log('Routes:');
-    console.log(routes);
+    // console.log('Routes:', routes);
 
     return [
       ...routes,
@@ -52,9 +40,5 @@ export default {
         component: 'src/components/pages/Home',
       },
     ];
-  },
-  webpack: config => {
-    config.resolve.alias = alias;
-    return config;
   },
 };
