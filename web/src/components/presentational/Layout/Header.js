@@ -3,36 +3,57 @@ import { Link, withRouter } from 'react-router-dom';
 import { Heading, majorScale, Pane, Tab, TabNavigation } from 'evergreen-ui';
 import PropTypes from 'prop-types';
 
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/javascript', label: 'Javascript' },
-  { to: '/mongodb', label: 'MongoDB' },
-];
+const navLinks = [{ to: '/javascript', label: 'Javascript' }, { to: '/mongodb', label: 'MongoDB' }];
 
 const Header = props => {
   const { location } = props;
-
+  // TODO: Highlight current link
   return (
     <header>
-      <Pane display={'flex'} borderBottom={'default'} elevation={1} padding={majorScale(2)}>
-        <Heading size={800} marginTop={0}>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <Link className="navbar-brand" to="/">
           Code Quiz
-        </Heading>
-        <TabNavigation marginLeft={majorScale(2)} className={{}}>
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              style={{ textDecoration: 'none', color: 'inherit' }}
-              exact
-              to={link.to}
-            >
-              <Tab height={32} isSelected={link.to === location.pathname}>
-                {link.label}
-              </Tab>
-            </Link>
-          ))}
-        </TabNavigation>
-      </Pane>
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Categories
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {navLinks.map(obj => (
+                  <Link className="dropdown-item" to={obj.to} key={obj.to}>
+                    {obj.label}
+                  </Link>
+                ))}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
   );
 };
